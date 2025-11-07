@@ -46,11 +46,12 @@ python manage.py runserver
 ## ✨ Features
 
 * Create, edit, and delete tasks
-* Mark tasks as **complete** or **undo** them
+* Mark tasks as **complete** or **undo** them 
 * Add, edit, and delete tags
 * Associate multiple tags with tasks
 * Responsive and minimal Bootstrap design
 * Admin panel for managing data
+* Added CBV toggle
 
 ---
 
