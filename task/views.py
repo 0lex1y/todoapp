@@ -1,7 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views import generic
+from django.views import generic, View
+from django.views.generic import RedirectView
 
 from task.forms import TaskForm
 from task.models import Task, Tag
@@ -12,11 +13,13 @@ class TasksListView(generic.ListView):
     context_object_name = 'tasks'
     template_name = 'task/task_list.html'
 
-def toggle_complete(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    task.complete = not task.complete
-    task.save()
-    return redirect(reverse_lazy('task:tasks_list'))
+class ToggleTaskCompleteView(View):
+    def post(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=self.kwargs['pk'])
+        task.complete = not task.complete
+        task.save()
+        return redirect('task:tasks_list')
+
 
 class TasksCreateView(generic.CreateView):
     model = Task
